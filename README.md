@@ -36,4 +36,3 @@
 ✅ Task search functionality
 ✅ Smooth animations for task operations
 ✅ Color-coding for overdue tasks
-✅ Cross-browser compatibility
