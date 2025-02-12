@@ -1,0 +1,369 @@
+:root {
+  --lavender: #e6e6fa;
+  --accent: #9370db;
+  --danger: #ff6b6b;
+  --light-gray: #f5f5f5;
+  --dark-gray: #333;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: var(--dark-gray);
+}
+
+/* Layout */
+.container {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  background: var(--lavender);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.filters button {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  padding: 0.5rem;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background 0.3s ease;
+}
+
+.filters button.active,
+.filters button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+  }
+  .mobile-menu {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background: var(--lavender);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .mobile-menu button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    background: transparent;
+    border: none;
+    color: var(--dark-gray);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .mobile-menu button.active,
+  .mobile-menu button:hover {
+    background: var(--accent);
+    color: white;
+  }
+}
+
+.main-content {
+  padding: 2rem;
+  background: white;
+  overflow-y: auto;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--dark-gray);
+  margin-bottom: 1rem;
+}
+
+/* Task Grid */
+.task-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  margin-top: 1rem;
+}
+
+.task-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.due-date {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.due-date.overdue {
+  color: var(--danger);
+  font-weight: bold;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.task-actions input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: background 0.3s ease;
+}
+
+.fab:hover {
+  background: #6a4cbf;
+}
+
+.search-bar {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.search-bar input {
+  width: 95%;
+  padding: 12px 20px;
+  border: 2px solid var(--lavender);
+  border-radius: 30px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(147, 112, 219, 0.3);
+}
+
+.search-bar i {
+  position: absolute;
+  right: 40px;
+  top: 30%;
+  transform: translateY(-50%);
+}
+
+/* Task Editor Modal */
+.editor-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.editor-content {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 600px;
+  box-shadow: var(--box-shadow);
+}
+
+.format-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.ql-editor {
+  height: 100px;
+}
+
+.format-button {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background 0.3s ease;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.modal-actions button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.date-picker {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.task-content {
+  line-height: 1.6;
+}
+
+.task-content strong {
+  font-weight: 600;
+}
+
+.task-content em {
+  font-style: italic;
+}
+
+.task-content u {
+  text-decoration: underline;
+}
+
+#voiceButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+#voiceButton.listening {
+  background-color: #f44336;
+  animation: pulse 1s infinite;
+}
+
+.modal-actions button:hover {
+  background: #6a4cbf;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  color: var(--dark-gray);
+}
+
+.empty-state p {
+  color: #666;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.calendar {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.flatpickr-day.has-task {
+  background: var(--lavender) !important;
+}
+
+.flatpickr-day.overdue {
+  background: var(--danger) !important;
+}
