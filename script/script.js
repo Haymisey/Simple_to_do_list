@@ -109,12 +109,6 @@ class TaskManager {
   initSpeechRecognition() {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
-    const micDefault = this.dom.voiceButton.querySelector(
-      'img[src="images/mic.png"]'
-    );
-    const micActive = this.dom.voiceButton.querySelector(
-      'img[src="images/mic-active.png"]'
-    );
 
     if (!SpeechRecognition) {
       this.dom.voiceButton.style.display = "none";
@@ -220,7 +214,6 @@ class TaskManager {
     this.calendar.redraw();
   }
 
-  // Enhanced Task Rendering with XSS protection
   createTaskElement(task) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("task-card");
@@ -280,10 +273,25 @@ class TaskManager {
     this.render();
   }
 
+  // Modified deleteTask method
   deleteTask(id) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
-    this.saveToLocalStorage();
-    this.render();
+    const taskElement = document.querySelector(`[data-id="${id}"]`);
+
+    if (taskElement) {
+      // Trigger animation
+      taskElement.classList.add("delete-animation");
+
+      // Remove after animation completes
+      taskElement.addEventListener(
+        "animationend",
+        () => {
+          this.tasks = this.tasks.filter((task) => task.id !== id);
+          this.saveToLocalStorage();
+          this.render();
+        },
+        { once: true }
+      );
+    }
   }
 
   setFilter(filter) {
