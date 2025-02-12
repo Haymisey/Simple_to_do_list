@@ -23,9 +23,17 @@
 - [Quill Rich Text Editor](https://quilljs.com/)
 - [Flatpickr Calendar](https://flatpickr.js.org/)
 
-## Installation & Usage
-
 ### Local Setup
 1. Clone the repository
 2. Navigate to project directory
 3. Open index.html
+
+### Additional Features Implemented
+✅ Voice-to-text input integration
+✅ Rich text formatting capabilities
+✅ Due date tracking with calendar view
+✅ Responsive mobile-first design
+✅ Task search functionality
+✅ Smooth animations for task operations
+✅ Color-coding for overdue tasks
+✅ Cross-browser compatibility
